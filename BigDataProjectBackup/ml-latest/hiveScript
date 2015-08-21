@@ -1,0 +1,7 @@
+create table ratingCounter (userId INT, movieId INT, rating INT) row format delimited fields terminated by ',';
+show tables;
+LOAD data inpath '/user/hive/ratingsMahout.csv' overwrite into table ratingCounter;
+INSERT OVERWRITE DIRECTORY '/user/hive/hiveResults'
+SELECT movieId
+FROM ratingCounter
+WHERE rating>=5;
